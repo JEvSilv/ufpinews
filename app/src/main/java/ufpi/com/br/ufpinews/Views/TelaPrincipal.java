@@ -89,9 +89,9 @@ public class TelaPrincipal extends AppCompatActivity {
 //                }catch (Exception e){
 ////                    noticia.setText("Não Deu!");
 //                }
-//                Intent troca = new
-//                Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
-//                TelaPrincipal.this.startActivity(troca);
+                Intent troca = new
+                Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
+                TelaPrincipal.this.startActivity(troca);
             }
 
             @Override
