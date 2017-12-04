@@ -84,13 +84,14 @@ public class TelaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view, final int position) {
                 //Values are passing to activity & to fragment as well
-                try{
-                    noticia.setText(noticiaList.get(position).get_data());
-                }catch (Exception e){
-//                    noticia.setText("Não Deu!");
-                }
-//                Intent trocatela = new Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
-//                startActivity(trocatela);
+//                try{
+//                    noticia.setText(noticiaList.get(position).get_data());
+//                }catch (Exception e){
+////                    noticia.setText("Não Deu!");
+//                }
+//                Intent troca = new
+//                Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
+//                TelaPrincipal.this.startActivity(troca);
             }
 
             @Override
