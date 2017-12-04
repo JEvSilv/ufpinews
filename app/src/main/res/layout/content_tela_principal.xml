@@ -9,7 +9,7 @@
     android:background="?attr/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_tela_principal"
-    tools:context="ufpi.com.br.ufpinews.TelaPrincipal">
+    tools:context="ufpi.com.br.ufpinews.Views.TelaPrincipal">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/show_noticia"

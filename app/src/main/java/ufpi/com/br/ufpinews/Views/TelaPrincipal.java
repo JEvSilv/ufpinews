@@ -1,5 +1,6 @@
-package ufpi.com.br.ufpinews;
+package ufpi.com.br.ufpinews.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,7 +16,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.ViewDebug;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,12 +31,15 @@ import ufpi.com.br.ufpinews.Adapter.ClickListener;
 import ufpi.com.br.ufpinews.Adapter.NoticiaAdapter;
 import ufpi.com.br.ufpinews.Adapter.RecyclerTouchListener;
 import ufpi.com.br.ufpinews.Models.Noticia;
+import ufpi.com.br.ufpinews.R;
 
 public class TelaPrincipal extends AppCompatActivity {
     public RequestQueue queue;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private List<Noticia> noticiaList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ public class TelaPrincipal extends AppCompatActivity {
                         // Display the first 500 characters of the response string.
 //                        noticia.setText("Response is: "+ response.toString());
                                 Type listType = new TypeToken<ArrayList<Noticia>>(){}.getType();
-                                List<Noticia> noticiaList = new Gson().fromJson(response.toString(), listType);
+                                noticiaList = new Gson().fromJson(response.toString(), listType);
 //                                noticia.setText(noticiaList .toString());
                                 mAdapter = new NoticiaAdapter(noticiaList);
                                 mRecyclerView.setAdapter(mAdapter);
@@ -82,11 +85,12 @@ public class TelaPrincipal extends AppCompatActivity {
             public void onClick(View view, final int position) {
                 //Values are passing to activity & to fragment as well
                 try{
-//                    noticia.setText(Integer.toString(position));
-//                    noticia.setText(mAdapter.notifyItemChanged(position).toString());
+                    noticia.setText(noticiaList.get(position).get_data());
                 }catch (Exception e){
 //                    noticia.setText("Não Deu!");
                 }
+//                Intent trocatela = new Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
+//                startActivity(trocatela);
             }
 
             @Override
