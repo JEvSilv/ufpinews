@@ -1,7 +1,9 @@
 package ufpi.com.br.ufpinews.Views;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,15 +41,13 @@ public class TelaPrincipal extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Noticia> noticiaList;
-
+    private TextView noticia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal);
-        final TextView noticia = (TextView) findViewById(R.id.show);
-//        List<Noticia> noticiaList = new ArrayList<Noticia>();
+        noticia = (TextView) findViewById(R.id.show);
         mRecyclerView = (RecyclerView) findViewById(R.id.show_noticia);
-
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
@@ -63,18 +63,15 @@ public class TelaPrincipal extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-//                        noticia.setText("Response is: "+ response.toString());
                                 Type listType = new TypeToken<ArrayList<Noticia>>(){}.getType();
                                 noticiaList = new Gson().fromJson(response.toString(), listType);
-//                                noticia.setText(noticiaList .toString());
                                 mAdapter = new NoticiaAdapter(noticiaList);
                                 mRecyclerView.setAdapter(mAdapter);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                noticia.setText("That didn't work!");
+                noticia.setText("That didn't work!");
             }
         });
         queue.add(stringRequest);
@@ -83,14 +80,11 @@ public class TelaPrincipal extends AppCompatActivity {
                 mRecyclerView, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-//                try{
-//                    noticia.setText(noticiaList.get(position).get_data());
-//                }catch (Exception e){
-////                    noticia.setText("Não Deu!");
-//                }
-                Intent troca = new
-                Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
+                String href = noticiaList.get(position).getHref();
+                String title = noticiaList.get(position).getTitulo();
+                Intent troca = new Intent(TelaPrincipal.this, NoticiaEspecificaActivity.class);
+                troca.putExtra("href", href);
+                troca.putExtra("title", title);
                 TelaPrincipal.this.startActivity(troca);
             }
 

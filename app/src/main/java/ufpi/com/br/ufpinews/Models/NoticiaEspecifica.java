@@ -5,15 +5,15 @@ package ufpi.com.br.ufpinews.Models;
  */
 
 public class NoticiaEspecifica {
-    public String texto;
-    public String href;
-    public String img;
-    public Boolean link;
-    public Boolean eimg;
     public Boolean etext;
+    public String text;
+    public Boolean link;
+    public String href;
+    public Boolean eimg;
+    public String img;
 
-    public NoticiaEspecifica(String texto, String href, String img, Boolean link, Boolean eimg, Boolean etext) {
-        this.texto = texto;
+    public NoticiaEspecifica(Boolean etext, String text, Boolean link, String href, Boolean eimg, String img) {
+        this.text = text;
         this.href = href;
         this.img = img;
         this.link = link;
@@ -22,11 +22,11 @@ public class NoticiaEspecifica {
     }
 
     public String getTexto() {
-        return texto;
+        return text;
     }
 
     public void setTexto(String texto) {
-        this.texto = texto;
+        this.text = texto;
     }
 
     public String getHref() {
