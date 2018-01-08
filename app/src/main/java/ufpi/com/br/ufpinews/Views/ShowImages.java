@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import ufpi.com.br.ufpinews.Adapter.ImagesAdapter;
+//import ufpi.com.br.ufpinews.Adapter.ImagesAdapter;
 import ufpi.com.br.ufpinews.R;
 
 /**

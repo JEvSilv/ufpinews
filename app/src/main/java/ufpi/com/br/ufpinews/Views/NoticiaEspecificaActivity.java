@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ufpi.com.br.ufpinews.Adapter.ImagesAdapter;
+import ufpi.com.br.ufpinews.Adapter.LinkAdapter;
 import ufpi.com.br.ufpinews.Adapter.NoticiaAdapter;
 import ufpi.com.br.ufpinews.Models.Noticia;
 import ufpi.com.br.ufpinews.Models.NoticiaEspecifica;
@@ -60,6 +61,10 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
     private LinearLayout layout;
     private Integer it_img;
     private View prox_view;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +80,12 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
         prox = (Button) findViewById(R.id.Prox);
         prox_view = findViewById(R.id.Prox);
         layout = (LinearLayout) findViewById(R.id.layout);
+        //linkAdapter
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.show_links);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         //img_id.setImageBitmap(bmp);
         prox_view.setVisibility(View.GONE);
@@ -129,13 +140,20 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
 
     void noticiaProcess(){
         System.out.println(noticiaEspecificaList.toString());
+        List<String> links_list = new ArrayList<String>();
         String text = "";
         for(NoticiaEspecifica ne: noticiaEspecificaList){
             if(ne.etext){
                 text = text + ne.text +'\n'+'\n';
             }
+
+            if(ne.link){
+                links_list.add(ne.href);
+            }
         }
-        body.setText(text);
+        mAdapter = new LinkAdapter(links_list);
+        mRecyclerView.setAdapter(mAdapter);
+        body.setText(Html.fromHtml(text));
     }
 
     void getImages(){
