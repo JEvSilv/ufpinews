@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -61,9 +62,9 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
     private LinearLayout layout;
     private Integer it_img;
     private View prox_view;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+//    private RecyclerView mRecyclerView;
+//    private RecyclerView.Adapter mAdapter;
+//    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +83,10 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
         layout = (LinearLayout) findViewById(R.id.layout);
         //linkAdapter
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.show_links);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView = (RecyclerView) findViewById(R.id.show_links);
+//        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
 
         //img_id.setImageBitmap(bmp);
         prox_view.setVisibility(View.GONE);
@@ -151,8 +152,10 @@ public class NoticiaEspecificaActivity extends AppCompatActivity {
                 links_list.add(ne.href);
             }
         }
-        mAdapter = new LinkAdapter(links_list);
-        mRecyclerView.setAdapter(mAdapter);
+//        mAdapter = new LinkAdapter(links_list);
+//        mRecyclerView.setAdapter(mAdapter);
+        body.setClickable(true);
+        body.setMovementMethod(LinkMovementMethod.getInstance());
         body.setText(Html.fromHtml(text));
     }
 
